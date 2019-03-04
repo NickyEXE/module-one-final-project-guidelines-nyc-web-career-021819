@@ -10,3 +10,14 @@ def get_location_from_user
   "
   location = gets.chomp()
 end
+
+def top_five_printer(hash)
+  i = 0
+  hash["businesses"].first(5).each do |business|
+    i +=1
+    puts "#{i}. #{business['name']}"
+    business["location"]["display_address"].each do |address_line|
+      puts address_line
+    end
+  end
+end
