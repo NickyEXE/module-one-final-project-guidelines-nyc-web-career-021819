@@ -6,8 +6,9 @@ require "json"
 require "http"
 require "optparse"
 require 'pry'
+require 'dotenv'
 
-API_KEY = "swceXKV7MTrYABpMKlKCsTFTbHGeDwWva009sbLfl8B7Bwv-slGx0yHi17wiSGEkxR1eG7Lj-zYEMu-lX4jG1XqC5RiKEyZJSyw0QYGcCwdulSTm2HGwAssMmZN9XHYx"
+API_KEY = ENV['YELP_API_KEY']
 
 # Constants, do not change these
 API_HOST = "https://api.yelp.com"
@@ -34,4 +35,20 @@ end
 
 def find_karaoke_places_near_location(location = "10001")
   search_yelp("karaoke",location.to_s)
+end
+
+def top_five_printer(hash)
+  puts "
+  Here are the top five spots in your area:
+  "
+  i = 0
+  hash["businesses"].first(5).each do |business|
+    i +=1
+    puts "#{i}. #{business['name']}"
+    business["location"]["display_address"].each do |address_line|
+      puts address_line
+    end
+    puts "**********************
+    "
+  end
 end

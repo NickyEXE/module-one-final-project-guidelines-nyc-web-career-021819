@@ -11,13 +11,26 @@ def get_location_from_user
   location = gets.chomp()
 end
 
-def top_five_printer(hash)
-  i = 0
-  hash["businesses"].first(5).each do |business|
-    i +=1
-    puts "#{i}. #{business['name']}"
-    business["location"]["display_address"].each do |address_line|
-      puts address_line
-    end
+def get_karaoke_establishment_from_user(hash)
+  puts "Which of these places would you like to wreck with your karaoke skills?
+
+  "
+  num = gets.chomp()
+  num.to_i-1
+end
+
+def picker(hash, number)
+  name = hash["businesses"][number]["name"]
+  location = hash["businesses"][number]["location"]["display_address"]
+
+  #if karaoke place doesn't exist in database then create
+  #NOTE WE'RE USING ** AS A DELIMITER
+  if !KaraokePlace.all.locations.include?(location.join("**"))
+    KaraokePlace.create(name: name,location: location.join("**"))
+  else
+    KaraokePlace.find_by(location: location.join("**"))
   end
 end
+
+
+0
