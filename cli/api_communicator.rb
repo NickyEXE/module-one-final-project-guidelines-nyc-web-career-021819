@@ -7,7 +7,7 @@ require "http"
 require "optparse"
 require 'pry'
 
-API_KEY = "swceXKV7MTrYABpMKlKCsTFTbHGeDwWva009sbLfl8B7Bwv-slGx0yHi17wiSGEkxR1eG7Lj-zYEMu-lX4jG1XqC5RiKEyZJSyw0QYGcCwdulSTm2HGwAssMmZN9XHYx"
+API_KEY = ""
 
 # Constants, do not change these
 API_HOST = "https://api.yelp.com"
