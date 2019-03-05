@@ -21,9 +21,11 @@ def runner
 
 
   karaoke_place = print_and_pick(business_hashes,0)
+
   #Including this so that it ends successfully if the user does not pick a place
   if karaoke_place.class == KaraokePlace
     input = karaoke_place_welcome(karaoke_place)
+
   end
 
 end
