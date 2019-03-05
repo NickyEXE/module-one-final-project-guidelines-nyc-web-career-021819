@@ -8,7 +8,11 @@ require "optparse"
 require 'pry'
 require 'dotenv'
 
+<<<<<<< HEAD
 API_KEY = ENV['YELP_API_KEY']
+=======
+API_KEY = ""
+>>>>>>> 677698cf846ecf66a3a11ef2178267437c3ef6f2
 
 # Constants, do not change these
 API_HOST = "https://api.yelp.com"
