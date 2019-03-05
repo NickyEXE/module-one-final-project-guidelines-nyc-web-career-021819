@@ -19,9 +19,9 @@ def get_karaoke_establishment_from_user(hash)
   num.to_i-1
 end
 
-def picker(hash, number)
-  name = hash["businesses"][number]["name"]
-  location = hash["businesses"][number]["location"]["display_address"]
+def picker(hash_array, number)
+  name = hash_array[number]["name"]
+  location = hash_array[number]["location"]["display_address"]
 
   #if karaoke place doesn't exist in database then create
   #NOTE WE'RE USING ** AS A DELIMITER
