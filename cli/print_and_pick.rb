@@ -1,45 +1,143 @@
 
-def get_karaoke_establishment_from_user(iterator)
-  puts "Do any of these sound good?
+def print_and_pick(hash_array, iterator)
+  if valid?(hash_array, iterator)
+    print_five(hash_array, iterator)
+    input = gets.chomp()
+    cleaned_input = input_interpreter(hash_array,input,iterator)
+    if cleaned_input.class == Fixnum
+      picker(hash_array,cleaned_input)
+    else
+    end
+  else
+    start_again
+  end
+end
+
+def input_interpreter(hash_array, input, iterator)
+  if input.to_i > 0 && input.to_i < (iterator + 6)
+    input.to_i-1
+  elsif input.downcase == "more"
+    print_and_pick(hash_array, iterator+5)
+  elsif input.downcase == "new location"
+    puts ""
+    runner
+  else
+    puts "Invalid input."
+    start_again
+  end
+end
+
+
+
+
+def valid?(hash_array,iterator)
+  if hash_array == nil || hash_array == []
+    puts "There are no karaoke places near that location."
+    false
+  elsif iterator > hash_array.length
+    if iterator > 0
+      puts "There are no more karaoke places near that location."
+    else
+      puts "There are no karaoke places near that location."
+    end
+    false
+  else
+    true
+  end
+end
+
+def print_five(hash_array,iterator)
+  puts "
+  Here are the top spots in your area:
+  "
+  i = iterator
+  hash_array[iterator..(iterator+4)].each do |business|
+    i +=1
+    puts "#{i}. #{business['name']}"
+    business["location"]["display_address"].each do |address_line|
+      puts address_line
+    end
+    puts "**********************
+    "
+  end
+  puts "
+  Do any of these sound good?
   If so, pick it by number. If you want to
   see more, type 'MORE'. If you want to
   choose a different location,  type
-  'NEW LOCATION'.
-  "
+  'NEW LOCATION'."
+end
+
+def start_again
+  puts "
+  Would you like to start again? Y/N"
   input = gets.chomp()
-  if input.to_i.include?(iterator..iterator+4)
-  num.to_i-1
-elsif input == "MORE"
-end
-
-def print_and_pick(hash_array)
-  iterator = 0
-  print_five(hash_array,iterator)
-  answer = get_karaoke_establishment_from_user
-
-end
-
-
-def print_five(hash_array,iterator)
-  if iterator < hash_array.length
-    puts "
-    Here are the top spots in your area:
-    "
-    i = iterator
-    hash_array[iterator..(iterator+4)].each do |business|
-      i +=1
-      puts "#{i}. #{business['name']}"
-      business["location"]["display_address"].each do |address_line|
-        puts address_line
-      end
-      puts "**********************
-      "
-    end
-  elsif iterator > 0
-    puts "There are no more matching karaoke places in your area."
-    []
+  if input == "Y"
+    runner
   else
-    puts "There are no matching karaoke places in your area."
-    []
+    puts "Exiting."
   end
 end
+
+
+def picker(hash_array, number)
+  name = hash_array[number]["name"]
+  location = hash_array[number]["location"]["display_address"]
+
+  #if karaoke place doesn't exist in database then create
+  #NOTE WE'RE USING ** AS A DELIMITER
+  if !KaraokePlace.all.locations.include?(location.join("**"))
+    KaraokePlace.create(name: name,location: location.join("**"))
+  else
+    KaraokePlace.find_by(location: location.join("**"))
+  end
+end
+
+# def input_interpreter(input, hash_array, iterator)
+#   if input.downcase == "more"
+#     if valid?(hash_array,(iterator+5))
+#       "MORE"
+#     else
+#       puts "There are no more karaoke places near that location."
+#       "NO MORE"
+#     end
+#   elsif input.downcase == "new location"
+#     "New Location"
+#   elsif
+#
+#
+# end
+
+
+
+
+# def get_karaoke_establishment_from_user()
+# input = gets.chomp()
+# if input == [] || nil
+#   puts "There are no karaoke places near that location."
+#    start_again
+# elsif(i+1..i+5).include?(input.to_i)
+# input.to_i-1
+# elsif i >= hash_array.length
+#   puts "There are no more karaoke places near that location.
+#   Returning you to beginning of app."
+#   binding.pry
+#   runner
+# elsif input.downcase == "more"
+#   i += 5
+#   print_five(hash_array,i)
+#   get_karaoke_establishment_from_user(hash_array,i)
+# else
+# end
+# end
+#
+#
+
+# def print_and_pick(hash_array)
+#   iterator = 0
+#   print_five(hash_array,iterator)
+#   answer = get_karaoke_establishment_from_user(hash_array, iterator)
+#   picker(hash_array, answer)
+# end
+#
+#

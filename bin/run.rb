@@ -1,34 +1,34 @@
 require_relative '../config/environment'
 require_relative "../cli/api_communicator.rb"
 require_relative "../cli/CLI.rb"
+require_relative "../cli/print_and_pick.rb"
+require_relative "../cli/in_karaoke_place.rb"
 
 #welcomes the user
-welcome
+def runner
+  welcome
+  #get_location_from_user asks the user where they want to sing,
+  #Gets.chomp the location (a string) from the user,
+  #stores it as a variable named "location" in run.rb
+  location = get_location_from_user
 
-#get_location_from_user asks the user where they want to sing,
-#Gets.chomp the location (a string) from the user,
-#stores it as a variable named "location" in run.rb
-location = get_location_from_user
+  #Pulls a raw_hash of businesses from the Yelp API for Karaoke
+  #in the location provided by the user
+  raw_hash = find_karaoke_places_near_location(location)
 
-#Pulls a raw_hash of businesses from the Yelp API for Karaoke
-#in the location provided by the user
-raw_hash = find_karaoke_places_near_location(location)
-
-#Cleans the hash, makes it an array of businesses, and sorts by rating
-business_hashes = produce_cleaned_array_of_businesses_from_yelp_raw_hash_sorted_by_rating(raw_hash)
-
-#prints the first five businesses
-print_and_pick
-
-print_five(business_hashes,0)
-
-#
-picked_number = get_karaoke_establishment_from_user(business_hashes)
+  #Cleans the hash, makes it an array of businesses, and sorts by rating
+  business_hashes = produce_cleaned_array_of_businesses_from_yelp_raw_hash_sorted_by_rating(raw_hash)
 
 
-karaoke_selected_place = picker(business_hashes, picked_number)
+  karaoke_place = print_and_pick(business_hashes,0)
+  #Including this so that it ends successfully if the user does not pick a place
+  if karaoke_place.class == KaraokePlace
+    input = karaoke_place_welcome(karaoke_place)
+  end
 
+end
 
+runner
 
 
 binding.pry

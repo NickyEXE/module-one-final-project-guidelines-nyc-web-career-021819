@@ -8,6 +8,9 @@ class KaraokePlace < ActiveRecord::Base
     end
   end
 
-
+  def print_location
+    puts self.location.split("**")
+    self.location
+  end
 
 end

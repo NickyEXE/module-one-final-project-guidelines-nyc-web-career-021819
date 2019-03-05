@@ -11,13 +11,13 @@ def get_location_from_user
   location = gets.chomp()
 end
 
-def get_karaoke_establishment_from_user(hash)
-  puts "Which of these places would you like to wreck with your karaoke skills?
-
-  "
-  num = gets.chomp()
-  num.to_i-1
-end
+# def get_karaoke_establishment_from_user(hash)
+#   puts "Which of these places would you like to wreck with your karaoke skills?
+#
+#   "
+#   num = gets.chomp()
+#   num.to_i-1
+# end
 
 def picker(hash_array, number)
   name = hash_array[number]["name"]
