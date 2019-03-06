@@ -25,9 +25,16 @@ class KaraokePlace < ActiveRecord::Base
     end
   end
 
+#might be able to delete this
   def print_song_library
     songs.each do |song|
       song.book_entry
+    end
+  end
+
+  def print_book
+    songs.each do |song|
+      song.full_entry
     end
   end
 

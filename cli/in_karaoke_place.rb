@@ -1,13 +1,17 @@
 def karaoke_place_welcome(karaoke_place)
   puts "Welcome to #{karaoke_place.name}. Here are your saved songs:
   "
-  karaoke_place.print_song_library
-  puts "Here's what you can do:
+  karaoke_place.print_book
+  puts "
+  Here's what you can do:
   1. Add a song to a song library.
-  2. Remove a song from the song library.
+  2. Update information about a song.
+  3. Remove a song from the song library.
   ************************************
 
   "
+  #need to add see more information about a song.
+  #back button
   input = gets.chomp()
   karaoke_landing_page_input_interpretter(input,karaoke_place)
 end
@@ -17,12 +21,15 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
   when "1"
     add_song_to_code_library(karaoke_place)
   when "2"
+    pick_song_to_update(karaoke_place)
+  when "3"
     puts "Which song do you want to remove? (Please use book number)"
     input2 = gets.chomp()
     KaraokeEntry.all
     remove_song_from_song_library(karaoke_place,input2)
   else
     puts "WORK IN PROGRESS COME BACK LATER"
+    karaoke_place_welcome(karaoke_place)
   end
 end
 
@@ -58,9 +65,3 @@ def remove_song_from_song_library(karaoke_place,input)
   KaraokeEntry.all.destroy(entry.id)
   karaoke_place_welcome(karaoke_place)
 end
-
-#  remove_song_from_song_library(karaoke_place)
-
-
-
-#need a landing page for playlist of songs that includes deleting
