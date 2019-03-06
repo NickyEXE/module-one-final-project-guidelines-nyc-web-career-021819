@@ -7,6 +7,7 @@ def print_and_pick(hash_array, iterator)
     if cleaned_input.class == Fixnum
       picker(hash_array,cleaned_input)
     else
+
     end
   else
     start_again
