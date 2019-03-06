@@ -40,7 +40,9 @@ end
 def produce_cleaned_array_of_businesses_from_yelp_raw_hash_sorted_by_rating(hash)
   if hash.has_key?("error")
     []
-  else hash["businesses"].length > 0
+  elsif hash["businesses"].length > 0
     hash["businesses"].sort_by {|business| business["rating"]}.reverse
+  else
+    puts "No available karaoke joints."
   end
 end
