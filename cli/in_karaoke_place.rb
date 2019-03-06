@@ -7,6 +7,7 @@ def karaoke_place_welcome(karaoke_place)
   1. Add a song to a song library.
   2. Update information about a song.
   3. Remove a song from the song library.
+  4. Exit the program.
   ************************************
 
   "
@@ -27,6 +28,10 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
     input2 = gets.chomp()
     KaraokeEntry.all
     remove_song_from_song_library(karaoke_place,input2)
+  when "4"
+  when "exit"
+  when "Exit"
+  when "EXIT"
   else
     puts "WORK IN PROGRESS COME BACK LATER"
     karaoke_place_welcome(karaoke_place)

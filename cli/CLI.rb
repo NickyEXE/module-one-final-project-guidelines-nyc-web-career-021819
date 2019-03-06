@@ -7,6 +7,8 @@ def get_location_from_user
   puts "Where do you want to drop the mic?
 
   Give me your zip code, city, area, whatever.
+
+  (Hit EXIT to leave this program.)
   "
   location = gets.chomp()
 end

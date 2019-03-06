@@ -11,16 +11,26 @@ def runner
   #Gets.chomp the location (a string) from the user,
   #stores it as a variable named "location" in run.rb
   location = get_location_from_user
-
+  
+  if location.downcase == "exit"
+  else
   #Pulls a raw_hash of businesses from the Yelp API for Karaoke
   #in the location provided by the user
   raw_hash = find_karaoke_places_near_location(location)
 
   #Cleans the hash, makes it an array of businesses, and sorts by rating
   business_hashes = produce_cleaned_array_of_businesses_from_yelp_raw_hash_sorted_by_rating(raw_hash)
+    if business_hashes.length > 0
+      iterator = printer(business_hashes,0)
+      karaoke_pick_inputter(business_hashes,iterator)
+    else
+      puts "No karaoke places available at that location. Please choose another location.
 
-  iterator =printer(business_hashes,0)
-  karaoke_pick_inputter(business_hashes,iterator)
+      *******
+      "
+      runner
+    end
+  end
   #karaoke_place = print_and_pick(business_hashes,0)
 
   #Including this so that it ends successfully if the user does not pick a place
@@ -28,7 +38,6 @@ def runner
   #   input = karaoke_place_welcome(karaoke_place)
   #
   # end
-
 end
 
 runner
