@@ -6,7 +6,7 @@ def pick_song_to_update(karaoke_place)
   "
   karaoke_place.print_book
   input = gets.chomp()
-  if input == "EXIT"
+  if input.downcase == "EXIT"
     karaoke_place_welcome(karaoke_place)
   else
     entry = KaraokeEntry.find_by book_number: input, karaoke_id: karaoke_place.id
