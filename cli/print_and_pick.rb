@@ -1,35 +1,43 @@
-
-def print_and_pick(hash_array, iterator)
-  if valid?(hash_array, iterator)
-    print_five(hash_array, iterator)
-    input = gets.chomp()
-    cleaned_input = input_interpreter(hash_array,input,iterator)
-    if cleaned_input.class == Fixnum
-      picker(hash_array,cleaned_input)
-    else
-
-    end
+def printer(hash_array,iterator)
+  if hash_array.length < iterator + 4
+    last_print = hash_array.length
   else
-    start_again
+    last_print = iterator+4
   end
+  i = iterator
+  hash_array[iterator..last_print].each do |business|
+    i +=1
+    puts "#{i}. #{business['name']}"
+    business["location"]["display_address"].each do |address_line|
+      puts address_line
+    end
+    puts "**********************
+    "
+  end
+  iterator
 end
 
-def input_interpreter(hash_array, input, iterator)
-  if input.to_i > 0 && input.to_i < (iterator + 6)
-    input.to_i-1
+def karaoke_pick_inputter(hash_array,iterator)
+  puts "
+  Do any of these sound good?
+  If so, pick it by number. If you want to
+  see more, type 'MORE'. If you want to
+  choose a different location,  type
+  'NEW LOCATION'."
+  input = gets.chomp()
+  if !valid?(hash_array,iterator)
+    puts "Invalid!"
   elsif input.downcase == "more"
-    print_and_pick(hash_array, iterator+5)
-  elsif input.downcase == "new location"
-    puts ""
-    runner
+    printer(hash_array,iterator+5)
+    karaoke_pick_inputter(hash_array,iterator+5)
+  elsif input.to_i > 0 && input.to_i < hash_array.length + 2
+    karaoke_place = picker(hash_array,input.to_i-1)
+    karaoke_place_welcome(karaoke_place)
   else
     puts "Invalid input."
-    start_again
+    karaoke_pick_inputter(hash_array,iterator)
   end
 end
-
-
-
 
 def valid?(hash_array,iterator)
   if hash_array == nil || hash_array == []
@@ -47,38 +55,74 @@ def valid?(hash_array,iterator)
   end
 end
 
-def print_five(hash_array,iterator)
-  puts "
-  Here are the top spots in your area:
-  "
-  i = iterator
-  hash_array[iterator..(iterator+4)].each do |business|
-    i +=1
-    puts "#{i}. #{business['name']}"
-    business["location"]["display_address"].each do |address_line|
-      puts address_line
-    end
-    puts "**********************
-    "
-  end
-  puts "
-  Do any of these sound good?
-  If so, pick it by number. If you want to
-  see more, type 'MORE'. If you want to
-  choose a different location,  type
-  'NEW LOCATION'."
-end
 
-def start_again
-  puts "
-  Would you like to start again? Y/N"
-  input = gets.chomp()
-  if input == "Y"
-    runner
-  else
-    puts "Exiting."
-  end
-end
+#
+# def print_and_pick(hash_array, iterator)
+#   if valid?(hash_array, iterator)
+#     print_ten(hash_array, iterator)
+#     input = gets.chomp()
+#     cleaned_input = input_interpreter(hash_array,input,iterator)
+#     if cleaned_input.class == Fixnum
+#       picker(hash_array,cleaned_input)
+#     else
+#
+#     end
+#   else
+#     start_again
+#   end
+# end
+
+# def input_interpreter(hash_array, input, iterator)
+#   if input.to_i > 0 && input.to_i < (hash_array.length+1)
+#     input.to_i-1
+#   elsif input.downcase == "more"
+#     print_and_pick(hash_array, iterator+10)
+#   elsif input.downcase == "new location"
+#     puts ""
+#     runner
+#   else
+#     puts "Invalid input."
+#     start_again
+#   end
+# end
+
+
+
+
+
+#
+# def print_ten(hash_array,iterator)
+#   puts "
+#   Here are the top spots in your area:
+#   "
+#   i = iterator
+#   hash_array[iterator..(iterator+9)].each do |business|
+#     i +=1
+#     puts "#{i}. #{business['name']}"
+#     business["location"]["display_address"].each do |address_line|
+#       puts address_line
+#     end
+#     puts "**********************
+#     "
+#   end
+#   puts "
+#   Do any of these sound good?
+#   If so, pick it by number. If you want to
+#   see more, type 'MORE'. If you want to
+#   choose a different location,  type
+#   'NEW LOCATION'."
+# end
+#
+# def start_again
+#   puts "
+#   Would you like to start again? Y/N"
+#   input = gets.chomp()
+#   if input == "Y"
+#     runner
+#   else
+#     puts "Exiting."
+#   end
+# end
 
 
 def picker(hash_array, number)
@@ -126,7 +170,7 @@ end
 #   runner
 # elsif input.downcase == "more"
 #   i += 5
-#   print_five(hash_array,i)
+#   print_ten(hash_array,i)
 #   get_karaoke_establishment_from_user(hash_array,i)
 # else
 # end
@@ -136,7 +180,7 @@ end
 
 # def print_and_pick(hash_array)
 #   iterator = 0
-#   print_five(hash_array,iterator)
+#   print_ten(hash_array,iterator)
 #   answer = get_karaoke_establishment_from_user(hash_array, iterator)
 #   picker(hash_array, answer)
 # end

@@ -19,14 +19,15 @@ def runner
   #Cleans the hash, makes it an array of businesses, and sorts by rating
   business_hashes = produce_cleaned_array_of_businesses_from_yelp_raw_hash_sorted_by_rating(raw_hash)
 
-
-  karaoke_place = print_and_pick(business_hashes,0)
+  iterator =printer(business_hashes,0)
+  karaoke_pick_inputter(business_hashes,iterator)
+  #karaoke_place = print_and_pick(business_hashes,0)
 
   #Including this so that it ends successfully if the user does not pick a place
-  if karaoke_place.class == KaraokePlace
-    input = karaoke_place_welcome(karaoke_place)
-
-  end
+  # if karaoke_place.class == KaraokePlace
+  #   input = karaoke_place_welcome(karaoke_place)
+  #
+  # end
 
 end
 
