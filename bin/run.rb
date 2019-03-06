@@ -1,8 +1,8 @@
 require_relative '../config/environment'
-require_relative "../cli/api_communicator.rb"
-require_relative "../cli/CLI.rb"
-require_relative "../cli/print_and_pick.rb"
-require_relative "../cli/in_karaoke_place.rb"
+# require_relative "../cli/api_communicator.rb"
+# require_relative "../cli/CLI.rb"
+# require_relative "../cli/print_and_pick.rb"
+# require_relative "../cli/in_karaoke_place.rb"
 
 #welcomes the user
 def runner

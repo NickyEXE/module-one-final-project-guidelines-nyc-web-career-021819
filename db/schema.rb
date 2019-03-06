@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190304200054) do
+ActiveRecord::Schema.define(version: 20190306142321) do
 
   create_table "karaoke_entries", force: :cascade do |t|
     t.integer "karaoke_id"
     t.integer "song_id"
-    t.integer "book_number"
+    t.string  "book_number"
   end
 
   create_table "karaoke_places", force: :cascade do |t|
