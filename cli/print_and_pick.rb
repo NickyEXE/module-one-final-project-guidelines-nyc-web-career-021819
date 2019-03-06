@@ -1,36 +1,41 @@
 def printer(hash_array,iterator)
-  if hash_array.length < iterator + 4
+  if hash_array.length <= iterator + 4
     last_print = hash_array.length
   else
     last_print = iterator+4
   end
-  i = iterator
-  hash_array[iterator..last_print].each do |business|
-    i +=1
-    puts "#{i}. #{business['name']}"
-    business["location"]["display_address"].each do |address_line|
-      puts address_line
+  if iterator > hash_array.length-4
+    puts "No more karaoke places available.
+    Please choose from the available options."
+  else
+    i = iterator
+    hash_array[iterator..last_print].each do |business|
+      i +=1
+      puts "#{i}. #{business['name']}"
+      business["location"]["display_address"].each do |address_line|
+        puts address_line
+      end
+      puts "**********************
+      "
     end
-    puts "**********************
-    "
+    puts "
+    Do any of these sound good?
+    If so, pick it by number. If you want to
+    see more, type 'MORE'. If you want to
+    choose a different location,  type
+    'NEW LOCATION'."
   end
   iterator
 end
 
 def karaoke_pick_inputter(hash_array,iterator)
-  puts "
-  Do any of these sound good?
-  If so, pick it by number. If you want to
-  see more, type 'MORE'. If you want to
-  choose a different location,  type
-  'NEW LOCATION'."
   input = gets.chomp()
   if !valid?(hash_array,iterator)
     puts "Invalid!"
   elsif input.downcase == "more"
     printer(hash_array,iterator+5)
     karaoke_pick_inputter(hash_array,iterator+5)
-  elsif input.to_i > 0 && input.to_i < hash_array.length + 2
+  elsif input.to_i > 0 && input.to_i < hash_array.length + 1
     karaoke_place = picker(hash_array,input.to_i-1)
     karaoke_place_welcome(karaoke_place)
   else
