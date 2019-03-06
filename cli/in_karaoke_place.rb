@@ -1,19 +1,21 @@
 def karaoke_place_welcome(karaoke_place)
-  puts "Welcome to #{karaoke_place.name}. What do you want to do?
-  1. See playlist of songs that you've added to the code library.
-  2. Add a song to the code library."
+  puts "Welcome to #{karaoke_place.name}. Here are your saved songs.
+  "
+  karaoke_place.print_song_library
+  puts " Would you like to add a song to the song library? Y/N"
   input = gets.chomp()
   karaoke_landing_page_input_interpretter(input,karaoke_place)
 end
 
 def karaoke_landing_page_input_interpretter(input,karaoke_place)
   case input
-  when "2"
+  when "Y"
     add_song_to_code_library(karaoke_place)
   else
     puts "WORK IN PROGRESS COME BACK LATER"
   end
 end
+
 
 def add_song_to_code_library(karaoke_place)
   puts "What song do you want to add?"
