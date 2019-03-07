@@ -33,6 +33,19 @@ def search_yelp(term, location)
   response.parse
 end
 
+def search_yelp_by_name(name, location)
+  url = "#{API_HOST}#{SEARCH_PATH}"
+  params = {
+    location: location,
+    term: name,
+    limit: 1
+  }
+
+  response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
+  response.parse
+end
+
+
 def find_karaoke_places_near_location(location = "10001")
   search_yelp("karaoke",location.to_s)
 end
