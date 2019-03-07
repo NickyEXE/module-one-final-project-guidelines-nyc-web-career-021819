@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190306142321) do
+ActiveRecord::Schema.define(version: 20190307214217) do
 
   create_table "karaoke_entries", force: :cascade do |t|
     t.integer "karaoke_id"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20190306142321) do
   end
 
   create_table "karaoke_places", force: :cascade do |t|
-    t.string "name"
-    t.string "location"
+    t.string  "name"
+    t.string  "location"
+    t.boolean "favorites"
   end
 
   create_table "songs", force: :cascade do |t|

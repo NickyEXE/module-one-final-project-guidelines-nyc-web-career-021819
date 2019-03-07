@@ -10,8 +10,9 @@ def karaoke_place_welcome(karaoke_place)
   2. Update information about a song.
   3. Remove a song from the song library.
   4. See a song's lyrics.
-  5. This place sucks. Find me a new karaoke spot.
-  6. Exit the program.
+  5. #{option_five(karaoke_place)}
+  6. This place sucks. Find me a new karaoke spot.
+  7. Exit the program.
   ***************************************
 
   "
@@ -19,6 +20,14 @@ def karaoke_place_welcome(karaoke_place)
   #back button
   input = gets.chomp()
   karaoke_landing_page_input_interpretter(input,karaoke_place)
+end
+
+def option_five(karaoke_place)
+  if karaoke_place.favorites
+    "Remove #{karaoke_place.name} from my list of favorite karaoke places."
+  else
+    "Add #{karaoke_place.name} to my list of favorite karaoke places."
+  end
 end
 
 def karaoke_landing_page_input_interpretter(input,karaoke_place)
@@ -40,8 +49,11 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
     lyrics_menu(karaoke_place)
     karaoke_place_welcome(karaoke_place)
   when "5"
-    ask_how_they_want_to_search
+    karaoke_place.update(favorites: !karaoke_place.favorites)
+    karaoke_place_welcome(karaoke_place)
   when "6"
+    ask_how_they_want_to_search
+  when "7"
   when "exit"
   when "Exit"
   when "EXIT"
