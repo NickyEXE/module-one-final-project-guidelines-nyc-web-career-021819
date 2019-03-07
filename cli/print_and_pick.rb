@@ -36,6 +36,10 @@ def karaoke_pick_inputter(hash_array,iterator)
     #recalls printer and then itself with a higher iterator
     printer(hash_array,iterator+5)
     karaoke_pick_inputter(hash_array,iterator+5)
+  elsif input.downcase == "new location"
+    runner
+  elsif input.downcase == "exit"
+    puts "Exiting application."
   elsif input.to_i > 0 && input.to_i < hash_array.length + 1
     #only valid option to get to the next page
     karaoke_place = picker(hash_array,input.to_i-1)
