@@ -3,7 +3,8 @@ def ask_how_they_want_to_search
 
   1. I know the karaoke spot I want to go to.
   2. I'm looking for a karaoke spot!
-  3. I started using this program by accident and want to leave.
+  3. I want to see my favorite spots.
+  4. I started using this program by accident and want to leave.
   "
   input = gets.chomp()
   case input
@@ -11,7 +12,9 @@ def ask_how_they_want_to_search
     karaoke_spot_find_by_name
   when "2"
     karaoke_spot_find_by_location
-  when "3" || "exit" || "Exit" || "EXIT"
+  when "3"
+    karaoke_spot_find_by_favorites
+  when "4" || "exit" || "Exit" || "EXIT"
     puts "I hope you find what you're looking for. Goodbye."
   else
     puts "That was an invalid input. Try again!"
@@ -125,5 +128,44 @@ def picker(hash_array, number)
     KaraokePlace.create(name: name,location: location.join("**"))
   else
     KaraokePlace.find_by(location: location.join("**"))
+  end
+end
+
+
+def karaoke_spot_find_by_favorites
+  favorites = KaraokePlace.all.select{|karaoke_place| karaoke_place.favorites == true}
+  if favorites.length > 0
+      puts "Here are your favorite karaoke places!"
+      i = 0
+      favorites.each do |karaoke_place|
+        i += 1
+        puts "#{i}. #{karaoke_place.name}"
+        puts karaoke_place.location.split('**')
+        puts ""
+
+      end
+    puts "Which one do you want to go to? (Choose by its listed number, or type BACK to go back or EXIT to exit.)"
+    input = gets.chomp()
+    if input.downcase == "back"
+      ask_how_they_want_to_search
+    elsif input.downcase == "exit"
+    elsif input.to_i>0
+      if favorites[input.to_i-1].class == KaraokePlace
+        karaoke_place = favorites[input.to_i-1]
+        karaoke_place_welcome(karaoke_place)
+      else
+        puts "Invalid input! Try again.
+        "
+        karaoke_spot_find_by_favorites
+      end
+    else
+      puts "Invalid input! Try again.
+      "
+      karaoke_spot_find_by_favorites
+    end
+  else
+    puts "You have not listed any favorites. Choose some favorite places after finding them the normal way!"
+    sleep(2)
+    ask_how_they_want_to_search
   end
 end
