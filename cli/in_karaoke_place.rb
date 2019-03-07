@@ -1,5 +1,7 @@
 def karaoke_place_welcome(karaoke_place)
-  puts "Welcome to #{karaoke_place.name}. Here are your saved songs:
+  sleep(3)
+  puts "
+  Welcome to #{karaoke_place.name}. Here are your saved songs:
   "
   karaoke_place.print_book
   puts "
