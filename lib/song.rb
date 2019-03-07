@@ -47,4 +47,35 @@ class Song < ActiveRecord::Base
         end
       end
     end
-end
+
+    def lyrics_printer
+      if !self.artist
+        puts "We need to know the artist name for this song before we can give you its lyrics.
+
+        Do you want to add an artist name? Y/N"
+        input = gets.chomp()
+        case input
+        when "Y"
+          #Finds the artist name, then re-calls the function with the updated song
+          puts "What's the artist name?"
+          artist_name=gets.chomp()
+          self.update(artist: artist_name)
+          self.lyrics_printer
+        when "N"
+          puts "Exiting."
+        end
+      else
+        begin
+          url = URI.escape("https://api.lyrics.ovh/v1/#{self.artist.downcase}/#{self.name.downcase}")
+          response = RestClient.get url
+        rescue RestClient::ExceptionWithResponse => e
+          if e.class == RestClient::NotFound
+            puts "I'm sorry, it looks like we don't have lyrics available for #{self.artist}'s #{self.name}'"
+          end
+        end
+        if response
+          puts JSON.parse(response)["lyrics"]
+        end
+      end
+    end
+  end

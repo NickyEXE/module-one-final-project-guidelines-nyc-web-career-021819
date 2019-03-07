@@ -1,5 +1,8 @@
 require 'dotenv/load'
 require 'bundler'
+#require 'rubygems' if RUBY_VERSION < '1.9'
+require 'rest_client'
+require 'uri'
 
 Bundler.require
 
