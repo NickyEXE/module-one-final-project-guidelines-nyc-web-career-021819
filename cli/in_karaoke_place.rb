@@ -7,8 +7,9 @@ def karaoke_place_welcome(karaoke_place)
   1. Add a song to a song library.
   2. Update information about a song.
   3. Remove a song from the song library.
-  4. Exit the program.
-  ************************************
+  4. See a song's lyrics.
+  5. Exit the program.
+  ***************************************
 
   "
   #need to add see more information about a song.
@@ -30,10 +31,12 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
       puts "Not an option. Try again"
       karaoke_place_welcome(karaoke_place)
     else
-     KaraokeEntry.all
      remove_song_from_song_library(karaoke_place,input2)
     end
   when "4"
+    lyrics_menu(karaoke_place)
+    karaoke_place_welcome(karaoke_place)
+  when "5"
   when "exit"
   when "Exit"
   when "EXIT"

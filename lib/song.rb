@@ -4,7 +4,7 @@ class Song < ActiveRecord::Base
 
 #might be able to delete this
   def book_entry
-    entry = karaoke_entries.find_by song_id: self.id
+    entry = KaraokeEntry.all.find_by song_id: self.id
     if entry == nil
     else
       puts "#{entry.book_number}. #{self.name}"
@@ -12,9 +12,12 @@ class Song < ActiveRecord::Base
   end
 
   def full_entry
-    entry = karaoke_entries.find_by song_id: self.id
-    puts "#{entry.book_number}: #{self.name ||= "No song listed."}
-    #{self.artist ||= "No artist listed."} (#{self.year ||= "No year listed."})"
+    entry = KaraokeEntry.all.find_by song_id: self.id
+    if entry
+      puts "#{entry.book_number}: #{self.name ||= "No song listed."}
+      #{self.artist ||= "No artist listed."} (#{self.year ||= "No year listed."})"
+    else
+    end
   end
 
   def info_prompter(karaoke_place)
