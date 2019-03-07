@@ -1,5 +1,5 @@
 def ask_how_they_want_to_search
-  puts "Do you know which Karaoke place you want to go to or do you want to find a karaoke spot in your area? (Type the number relating to your option below.)
+  puts "Do you know which karaoke place you want to go to or do you want to find a karaoke spot in your area? (Type the number relating to your option below.)
 
   1. I know the karaoke spot I want to go to.
   2. I'm looking for a karaoke spot!
