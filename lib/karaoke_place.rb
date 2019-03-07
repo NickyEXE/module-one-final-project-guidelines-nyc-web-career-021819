@@ -28,6 +28,7 @@ class KaraokePlace < ActiveRecord::Base
   def has_song?(song)
     self.songs.include?(song)
   end
+
 #might be able to delete this
   def print_song_library
     songs.each do |song|
