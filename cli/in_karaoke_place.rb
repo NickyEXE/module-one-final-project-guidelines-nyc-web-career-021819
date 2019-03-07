@@ -26,8 +26,13 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
   when "3"
     puts "Which song do you want to remove? (Please use book number)"
     input2 = gets.chomp()
-    KaraokeEntry.all
-    remove_song_from_song_library(karaoke_place,input2)
+    if !KaraokeEntry.all.find_by(book_number: input2, karaoke_id: karaoke_place.id)
+      puts "Not an option. Try again"
+      karaoke_place_welcome(karaoke_place)
+    else
+     KaraokeEntry.all
+     remove_song_from_song_library(karaoke_place,input2)
+    end
   when "4"
   when "exit"
   when "Exit"
