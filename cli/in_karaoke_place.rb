@@ -1,5 +1,4 @@
 def karaoke_place_welcome(karaoke_place)
-  sleep(3)
   puts "
   Welcome to #{karaoke_place.name}. Here are your saved songs:
   "
@@ -58,7 +57,7 @@ def karaoke_landing_page_input_interpretter(input,karaoke_place)
   when "Exit"
   when "EXIT"
   else
-    puts "WORK IN PROGRESS COME BACK LATER"
+    "Invalid input. Enter something else."
     karaoke_place_welcome(karaoke_place)
   end
 end

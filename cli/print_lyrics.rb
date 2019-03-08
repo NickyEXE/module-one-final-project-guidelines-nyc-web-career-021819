@@ -8,6 +8,7 @@ def lyrics_menu(karaoke_place)
     song = Song.find(entry.song_id)
     if song
       song.lyrics_printer
+      sleep(2)
     else
       puts "We don't have a song matching that book number in our database. Returning you to the #{karaoke_place.name} lobby."
     end

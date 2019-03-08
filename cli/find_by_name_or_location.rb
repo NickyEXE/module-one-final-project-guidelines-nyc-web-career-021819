@@ -64,6 +64,7 @@ def check_if_it_is_the_right_place(karaoke_place)
   case input
   when "Y"
     puts "Going to #{karaoke_place.name}."
+    sleep(3)
     karaoke_place_welcome(karaoke_place)
   when "N"
     karaoke_spot_find_by_name
@@ -152,6 +153,7 @@ def karaoke_spot_find_by_favorites
     elsif input.to_i>0
       if favorites[input.to_i-1].class == KaraokePlace
         karaoke_place = favorites[input.to_i-1]
+        sleep(3)
         karaoke_place_welcome(karaoke_place)
       else
         puts "Invalid input! Try again.
