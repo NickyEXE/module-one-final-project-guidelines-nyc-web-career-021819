@@ -32,13 +32,13 @@ class KaraokePlace < ActiveRecord::Base
 #might be able to delete this
   def print_song_library
     songs.each do |song|
-      song.book_entry
+      song.book_entry(self)
     end
   end
 
   def print_book
     songs.each do |song|
-      song.full_entry
+      song.full_entry(self)
     end
   end
 

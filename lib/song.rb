@@ -3,16 +3,16 @@ class Song < ActiveRecord::Base
   has_many :karaoke_places, through: :karaoke_entries
 
 #might be able to delete this
-  def book_entry
-    entry = KaraokeEntry.all.find_by song_id: self.id
+  def book_entry(karaoke_place)
+    entry = KaraokeEntry.all.find_by song_id: self.id, karaoke_id: karaoke_place.id
     if entry == nil
     else
       puts "#{entry.book_number}. #{self.name}"
     end
   end
 
-  def full_entry
-    entry = KaraokeEntry.all.find_by song_id: self.id
+  def full_entry(karaoke_place)
+    entry = KaraokeEntry.all.find_by song_id: self.id, karaoke_id: karaoke_place.id
     if entry
       puts "#{entry.book_number}: #{self.name ||= "No song listed."}
       #{self.artist ||= "No artist listed."} (#{self.year ||= "No year listed."})"
