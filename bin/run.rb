@@ -1,6 +1,7 @@
 require_relative '../config/environment'
 
 #welcomes the user
+system "say \'Hi there, Welcome to MicDropper.\'"
 system "clear"
  puts "\e[H\e[2J"
 

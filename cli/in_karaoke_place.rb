@@ -1,6 +1,6 @@
 def karaoke_place_welcome(karaoke_place)
   puts "
-  Welcome to #{karaoke_place.name}. Here are your saved songs:
+  Welcome to #{karaoke_place.name}. #{karaoke_place.saved_songs_descripter}
   "
   karaoke_place.print_book
   puts "
@@ -20,6 +20,7 @@ def karaoke_place_welcome(karaoke_place)
   input = gets.chomp()
   karaoke_landing_page_input_interpretter(input,karaoke_place)
 end
+
 
 def option_five(karaoke_place)
   if karaoke_place.favorites

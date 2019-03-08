@@ -42,4 +42,12 @@ class KaraokePlace < ActiveRecord::Base
     end
   end
 
+  def saved_songs_descripter
+    if self.songs.length >0
+      "Here are your saved songs: "
+    else
+      "You have no saved songs at #{self.name}."
+    end
+  end
+
 end
